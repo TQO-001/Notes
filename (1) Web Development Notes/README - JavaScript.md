@@ -1055,6 +1055,57 @@ JavaScript objects are very flexible and can hold **any data type** as values, i
     - For example, imagine you want to execute different actions based on a type of input. You could store functions in an object and call the appropriate one based on the input.
 
 ---
+### (10.0.4) Looping Through Object Keys and Values Dynamically
+
+When working with objects in JavaScript, you may often need to loop through their keys and values without knowing their names in advance. There are a few ways to accomplish this:
+
+#### 1. **Using `for...in` loop**
+
+The `for...in` loop allows you to iterate over all the enumerable properties of an object. However, it's important to check if the property is directly on the object and not inherited from its prototype.
+
+```javascript
+const obj = { name: 'Alice', age: 25, city: 'Wonderland' };
+
+for (const key in obj) {
+  if (obj.hasOwnProperty(key)) {  // Ensure the key is not inherited
+    console.log(`Key: ${key}, Value: ${obj[key]}`);
+  }
+}
+```
+
+- **`hasOwnProperty(key)`**: This ensures that only properties directly on the object are accessed, not those inherited through the prototype chain.
+
+#### 2. **Using `Object.entries()`**
+
+The `Object.entries()` method returns an array of `[key, value]` pairs, which makes it easier to loop through and access both keys and values at the same time.
+
+```javascript
+const obj = { name: 'Alice', age: 25, city: 'Wonderland' };
+
+Object.entries(obj).forEach(([key, value]) => {
+  console.log(`Key: ${key}, Value: ${value}`);
+});
+```
+
+- **`Object.entries(obj)`**: Converts the object into an array of key-value pairs that can be iterated over using `forEach` or any other loop structure.
+
+#### 3. **Using `for...of` with `Object.entries()`**
+
+Alternatively, you can use a `for...of` loop with `Object.entries()` for better readability and control over the iteration.
+
+```javascript
+const obj = { name: 'Alice', age: 25, city: 'Wonderland' };
+
+for (const [key, value] of Object.entries(obj)) {
+  console.log(`Key: ${key}, Value: ${value}`);
+}
+```
+
+#### Key Takeaways:
+
+- **`for...in` loop**: Allows you to loop over all keys in the object (including inherited ones, so you may need to use `hasOwnProperty`).
+- **`Object.entries()`**: Converts the object into an array of key-value pairs, allowing you to loop over them with a more concise approach. It is cleaner when you need both the key and value.
+---
 
 ### Summary of Notes
 
