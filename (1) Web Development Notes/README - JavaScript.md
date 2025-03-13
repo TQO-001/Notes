@@ -1105,6 +1105,163 @@ for (const [key, value] of Object.entries(obj)) {
 
 - **`for...in` loop**: Allows you to loop over all keys in the object (including inherited ones, so you may need to use `hasOwnProperty`).
 - **`Object.entries()`**: Converts the object into an array of key-value pairs, allowing you to loop over them with a more concise approach. It is cleaner when you need both the key and value.
+
+---
+### (10.0.5) Methods for Objects in JavaScript
+
+In JavaScript, objects come with a variety of built-in methods that help you manipulate and work with them efficiently. Below are some common and useful methods for working with objects:
+
+#### 1. **`Object.keys()`**
+
+The `Object.keys()` method returns an array of a given object's own enumerable property names (keys).
+
+```javascript
+const person = { name: 'Alice', age: 30, city: 'Wonderland' };
+
+const keys = Object.keys(person);
+console.log(keys); // Outputs: ["name", "age", "city"]
+```
+
+- **Use case**: To get all the keys of an object as an array.
+
+#### 2. **`Object.values()`**
+
+The `Object.values()` method returns an array of a given object's own enumerable property values.
+
+```javascript
+const person = { name: 'Alice', age: 30, city: 'Wonderland' };
+
+const values = Object.values(person);
+console.log(values); // Outputs: ["Alice", 30, "Wonderland"]
+```
+
+- **Use case**: To get all the values of an object as an array.
+
+#### 3. **`Object.entries()`**
+
+The `Object.entries()` method returns an array of a given object's own enumerable string-keyed property `[key, value]` pairs.
+
+```javascript
+const person = { name: 'Alice', age: 30, city: 'Wonderland' };
+
+const entries = Object.entries(person);
+console.log(entries); // Outputs: [["name", "Alice"], ["age", 30], ["city", "Wonderland"]]
+```
+
+- **Use case**: To get an array of `[key, value]` pairs, useful when you want to loop through both keys and values simultaneously.
+
+#### 4. **`Object.freeze()`**
+
+The `Object.freeze()` method freezes an object, meaning you can no longer add, delete, or modify its properties.
+
+```javascript
+const person = { name: 'Alice', age: 30 };
+Object.freeze(person);
+
+person.age = 31; // Does nothing
+person.city = 'Wonderland'; // Does nothing
+
+console.log(person); // Outputs: { name: 'Alice', age: 30 }
+```
+
+- **Use case**: To prevent changes to an object, making it immutable.
+
+#### 5. **`Object.seal()`**
+
+The `Object.seal()` method seals an object, which means you can no longer add new properties, but existing properties can still be modified.
+
+```javascript
+const person = { name: 'Alice', age: 30 };
+Object.seal(person);
+
+person.age = 31; // Works
+person.city = 'Wonderland'; // Does nothing
+
+console.log(person); // Outputs: { name: 'Alice', age: 31 }
+```
+
+- **Use case**: To prevent new properties from being added to an object while still allowing modification of existing ones.
+
+#### 6. **`Object.assign()`**
+
+The `Object.assign()` method copies all enumerable own properties from one or more source objects to a target object.
+
+```javascript
+const person = { name: 'Alice' };
+const details = { age: 30, city: 'Wonderland' };
+
+const combined = Object.assign({}, person, details);
+console.log(combined); // Outputs: { name: 'Alice', age: 30, city: 'Wonderland' }
+```
+
+- **Use case**: To merge objects or create a shallow copy of an object.
+
+#### 7. **`Object.hasOwn()`** (ES2022)
+
+The `Object.hasOwn()` method checks if an object has a specific property as its own property, as opposed to inheriting it from the prototype chain.
+
+```javascript
+const person = { name: 'Alice' };
+
+console.log(Object.hasOwn(person, 'name')); // true
+console.log(Object.hasOwn(person, 'age')); // false
+```
+
+- **Use case**: To check whether an object directly has a certain property (excluding inherited properties).
+
+#### 8. **`Object.getPrototypeOf()`**
+
+The `Object.getPrototypeOf()` method returns the prototype (i.e., the internal `[[Prototype]]`) of the specified object.
+
+```javascript
+const person = { name: 'Alice' };
+const prototype = Object.getPrototypeOf(person);
+
+console.log(prototype); // Outputs: Object {} (the prototype object)
+```
+
+- **Use case**: To get the prototype of an object, useful for inheritance checks.
+
+#### 9. **`Object.setPrototypeOf()`**
+
+The `Object.setPrototypeOf()` method sets the prototype (i.e., the internal `[[Prototype]]`) of a specified object.
+
+```javascript
+const person = { name: 'Alice' };
+const animal = { species: 'Human' };
+
+Object.setPrototypeOf(person, animal);
+
+console.log(person.species); // Outputs: "Human"
+```
+
+- **Use case**: To set or change the prototype of an object, which affects inheritance.
+
+---
+
+### Key Takeaways:
+
+|**Method**|**Description**|**Example**|
+|---|---|---|
+|**`Object.keys()`**|Returns an array of an object's own enumerable property names (keys).|`Object.keys({name: 'Alice', age: 30}); // ["name", "age"]`|
+|**`Object.values()`**|Returns an array of an object's own enumerable property values.|`Object.values({name: 'Alice', age: 30}); // ["Alice", 30]`|
+|**`Object.entries()`**|Returns an array of `[key, value]` pairs of an object's own enumerable properties.|`Object.entries({name: 'Alice', age: 30}); // [["name", "Alice"], ["age", 30]]`|
+|**`Object.freeze()`**|Freezes an object, making it immutable (no property additions, deletions, or modifications).|`Object.freeze({name: 'Alice'}); // Cannot modify properties`|
+|**`Object.seal()`**|Seals an object, preventing new properties from being added but allows modification of existing ones.|`Object.seal({name: 'Alice'}); // Cannot add new properties, but can modify existing ones`|
+|**`Object.assign()`**|Copies properties from one or more source objects to a target object.|`Object.assign({}, {name: 'Alice'}, {age: 30}); // {name: 'Alice', age: 30}`|
+|**`Object.hasOwn()`**|Checks if an object has a specific property as its own (not inherited).|`Object.hasOwn({name: 'Alice'}, 'name'); // true`|
+|**`Object.getPrototypeOf()`**|Returns the prototype (internal `[[Prototype]]`) of an object.|`Object.getPrototypeOf({name: 'Alice'}); // Object {} (the prototype object)`|
+|**`Object.setPrototypeOf()`**|Sets the prototype of an object, affecting inheritance.|`Object.setPrototypeOf({name: 'Alice'}, {species: 'Human'}); // Inherited properties available`|
+
+- **`Object.keys()`, `Object.values()`, `Object.entries()`**: Used to extract keys, values, or both from an object.
+- **`Object.freeze()`**: Prevents modification of an object.
+- **`Object.seal()`**: Prevents the addition of new properties but allows modification of existing properties.
+- **`Object.assign()`**: Merges or copies properties from one object to another.
+- **`Object.hasOwn()`**: Checks if an object has a specific property as its own.
+- **`Object.getPrototypeOf()` and `Object.setPrototypeOf()`**: Used to get or set the prototype of an object.
+
+These methods make working with objects more powerful and flexible, allowing for various operations like property access, object immutability, and inheritance manipulation.
+
 ---
 
 ### Summary of Notes
