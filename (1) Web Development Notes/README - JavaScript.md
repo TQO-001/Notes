@@ -346,6 +346,23 @@ greet();  // Call the function
 - **Parameters**: Variables passed into a function for processing.
 
 ---
+### Rest Parameters
+
+The rest parameter syntax (`...args`) allows you to pass an indefinite number of arguments as an array.
+
+#### Example: Using Rest Parameters
+
+```javascript
+function sumAll(...numbers) {
+    return numbers.reduce((total, num) => total + num, 0);
+}
+
+console.log(sumAll(1, 2, 3, 4));  // Outputs: 10
+```
+
+- **Rest Parameter**: Gathers all remaining arguments into an array, enabling flexible function inputs.
+
+---
 
 ### Passing an Array to a Function
 
@@ -376,7 +393,6 @@ console.log(squareArray([2, 4, 6]));  // Outputs: [4, 16, 36]
 - **Note**: Unlike `forEach()`, `map()` returns a new array and leaves the original unchanged.
 
 ---
-
 ### Passing an Object to a Function
 
 Objects, being complex data types passed by reference, can be handled with special techniques like **object destructuring**.
@@ -393,24 +409,6 @@ displayUser(user);  // Outputs: "Alice is 30 years old."
 ```
 
 - **Destructuring**: Extracts object properties directly in the parameter list for cleaner code.
-
----
-
-### Rest Parameters
-
-The rest parameter syntax (`...args`) allows you to pass an indefinite number of arguments as an array.
-
-#### Example: Using Rest Parameters
-
-```javascript
-function sumAll(...numbers) {
-    return numbers.reduce((total, num) => total + num, 0);
-}
-
-console.log(sumAll(1, 2, 3, 4));  // Outputs: 10
-```
-
-- **Rest Parameter**: Gathers all remaining arguments into an array, enabling flexible function inputs.
 
 ---
 
@@ -436,8 +434,115 @@ console.log(multiply(4, 2));  // Outputs: 8
 - **Arrow Function**: A shorter syntax for writing functions.
 
 ---
+### Closures
+In JavaScript, **closures** are a fundamental concept that allow a function to "remember" the environment in which it was created. This means a closure is a function that has access to variables from its outer (enclosing) function even after the outer function has finished executing.
+#### 1. **What is a closure?**
 
-These notes now cover the basics of function declarations, passing arrays and objects to functions, and using rest parameters, giving you a solid foundation for handling various data types in JavaScript functions.
+A closure is created when a function is defined inside another function and gains access to the outer function's variables, even after the outer function has returned.
+
+#### 2. **How does it work?**
+
+- A **closure** occurs when a function remembers and can access its lexical scope, even when the function is executed outside that scope.
+- This can be useful when you want to maintain state in an environment where functions are supposed to be independent.
+
+##### **Example:**
+
+```javascript
+function outerFunction() {
+  let outerVariable = 'I am from the outer function!';
+
+  function innerFunction() {
+    console.log(outerVariable);  // Accessing outerVariable from outerFunction
+  }
+
+  return innerFunction;  // Returning the inner function
+}
+
+const closureExample = outerFunction();
+closureExample();  // Logs: 'I am from the outer function!'
+```
+
+In this example:
+
+- `outerFunction` creates a local variable `outerVariable` and defines `innerFunction` inside it.
+- `innerFunction` is returned by `outerFunction` and assigned to `closureExample`.
+- When `closureExample` is called, it still has access to `outerVariable`, even though `outerFunction` has already returned. This is because `innerFunction` forms a **closure** over its surrounding lexical environment, allowing it to access `outerVariable`.
+
+#### 3. **Why are closures important?**
+
+- **Encapsulation**: Closures allow you to create private variables that cannot be accessed directly from the outside, mimicking object-oriented behavior.
+- **Function factories**: You can use closures to create functions with pre-configured data, such as a counter function.
+- **Callbacks and event handlers**: They are useful in asynchronous code where you need to maintain access to variables even after the execution context has changed (e.g., inside callbacks).
+
+#### 4. **Example with a counter:**
+
+```javascript
+function createCounter() {
+  let count = 0;
+
+  return {
+    increment: function() {
+      count++;
+      console.log(count);
+    },
+    decrement: function() {
+      count--;
+      console.log(count);
+    },
+    getCount: function() {
+      console.log(count);
+    }
+  };
+}
+
+const counter = createCounter();
+counter.increment();  // Logs: 1
+counter.increment();  // Logs: 2
+counter.getCount();   // Logs: 2
+counter.decrement();  // Logs: 1
+```
+
+In this case, the `increment`, `decrement`, and `getCount` functions form closures around the `count` variable, allowing them to modify or access it even after `createCounter` has finished executing.
+
+#### 5. **Closure with setTimeout (a common use case):**
+
+```javascript
+function createTimers() {
+  for (let i = 0; i < 3; i++) {
+    setTimeout(function() {
+      console.log(i);  // This will log 0, 1, 2 due to closures
+    }, 1000);
+  }
+}
+
+createTimers();
+```
+
+Notice how the variable `i` is captured by the closure within the `setTimeout` callback, meaning it gets the value of `i` when that specific timer is triggered.
+
+#### 6. **Common Pitfall (Using `var` vs `let` in loops):**
+
+If you used `var` instead of `let` in the loop above, all the `setTimeout` callbacks would reference the same value of `i` (which would be 3 after the loop finishes), and you'd see `3` logged three times.
+
+```javascript
+function createTimers() {
+  for (var i = 0; i < 3; i++) {
+    setTimeout(function() {
+      console.log(i);  // This will log 3, 3, 3 because `var` is function-scoped
+    }, 1000);
+  }
+}
+
+createTimers();
+```
+
+Using `let` ensures each iteration creates a new scope for the loop variable `i`, so each `setTimeout` gets its own value of `i`.
+
+#### Conclusion:
+
+Closures are a powerful feature in JavaScript that allow functions to maintain access to variables from their lexical scope. They are widely used for data encapsulation, maintaining state, and working with asynchronous operations.
+
+---
 ## **6. Conditional Statements**
 
 - ### if statement: `if`
@@ -718,6 +823,7 @@ let fruits = ["apple", "banana", "cherry"];
 ```
 
 - **Array**: A collection of items (strings, numbers, etc.) stored in a single variable.
+
 ### JavaScript Array Methods
 
 #### Commonly Used Array Methods
@@ -818,13 +924,13 @@ console.log(person["lastName"]);      // Bracket notation
 console.log(person.greet());
 ```
 
-### **Key Concepts:**
+#### Key Concepts:
 
 - **Properties:** Variables stored inside an object.
 - **Methods:** Functions associated with an object.
 - **`this` keyword:** References the current object, useful inside methods to access properties and values.
 
-### **Understanding `this` in Objects**
+#### **Understanding `this` in Objects**
 
 When you're inside an object method, the `this` keyword refers to the object itself. To access properties or values of the object, you must use `this`.
 
@@ -848,11 +954,11 @@ let person = {
 person.greet();  // Output: "Alice"
 ```
 
-### Dot VS Bracket Notation
+#### Dot VS Bracket Notation
 
 Both **dot notation** and **bracket notation** are common ways to access properties of an object in JavaScript, but they are used in different scenarios. Here's a breakdown:
 
-#### 1. **Dot notation** (e.g., `person.firstName`)
+##### 1. **Dot notation** (e.g., `person.firstName`)
 
 - **More common**: Dot notation is generally more frequently used because it's simpler and more readable.
 - **Restrictions**: It can only be used when the property name is a valid identifier (no spaces, no special characters, etc.), and the property name must be known in advance (i.e., it must be a fixed string).
@@ -863,7 +969,7 @@ Both **dot notation** and **bracket notation** are common ways to access propert
     ```
     
 
-#### 2. **Bracket notation** (e.g., `person["lastName"]`)
+##### 2. **Bracket notation** (e.g., `person["lastName"]`)
 
 - **Less common**: Bracket notation is used less often, but it's still essential in certain situations.
 - **Flexibility**: It allows the use of dynamic property names (i.e., you can use variables, strings with spaces, or special characters as keys).
@@ -874,7 +980,7 @@ Both **dot notation** and **bracket notation** are common ways to access propert
     ```
     
 
-### When to use each:
+##### When to use each:
 
 - **Dot notation** is more common for most standard use cases where property names are valid identifiers (e.g., no spaces, no special characters).
 - **Bracket notation** is used in these cases:
@@ -882,43 +988,26 @@ Both **dot notation** and **bracket notation** are common ways to access propert
     - When property names have spaces or special characters that aren't allowed in dot notation.
     - When the property name is not a valid identifier (e.g., `person["1stName"]` or `person["last-name"]`).
 
-#### Example of a dynamic key:
+##### Example of a dynamic key:
 
 ```javascript
-let key = "firstName";
-console.log(person[key]);  // Using bracket notation to access property dynamically
+let person = {
+    name: "Thulani",
+    age: 21,
+    greet: function() {console.log(`Hi, I'm ${this.name}`);}
+}
+
+let key = "name";
+console.log(person[key]);  // Using bracket notation to access property dynamically
+
 ```
 
-### Recap: **Scope and the `this` Keyword**
+##### Recap: **Scope and the `this` Keyword**
 
 - When accessing properties of an object within a method, use **`this.propertyName`** to ensure you're referring to the object's properties, even if there are variables with the same name elsewhere in the scope.
 - **Without `this`**, JavaScript will first check the local scope and then the global scope, which might lead to accessing the wrong variable if they share the same name.
-
-This should help clarify the use of `this`, dot notation, and bracket notation within your notes!
-## **10. Events and DOM Manipulation**
-### (10.0) JavaScript Basics Recap:
-
-Before diving into objects and functions as values, let’s quickly review the basic data types:
-
-1. **Primitive Types**:
-    
-    - **String**: e.g., `"Hello"`
-    - **Number**: e.g., `123`
-    - **Boolean**: e.g., `true`, `false`
-    - **null**: special value representing "no value"
-    - **undefined**: represents an uninitialized variable
-    - **Symbol**: used to create unique identifiers
-    - **BigInt**: large integers (e.g., `1234567890123456789012345678901234567890n`)
-2. **Complex Types**:
-    
-    - **Object**: a collection of key-value pairs
-    - **Array**: a special kind of object used for ordered data
-
-Now let’s focus on **functions** and **objects**.
-
 ---
-
-### (10.0.1) Functions as Objects in JavaScript
+### Functions as Objects in JavaScript
 
 In JavaScript, functions are **first-class objects**. This means:
 
@@ -930,8 +1019,7 @@ In JavaScript, functions are **first-class objects**. This means:
 This is where you see functions being stored as values in objects.
 
 ---
-
-### (10.0.2) Key Concepts: Functions as Values in Objects
+### Functions as Values in Objects
 
 #### 1. **Assigning a function to an object property**
 
@@ -968,7 +1056,7 @@ const person = {
 person.greet(); // Outputs: "Hi, undefined" (because `this` behaves differently in arrow functions)
 ```
 
-- Note: **Arrow functions** do **not** bind their own `this` context, which can sometimes cause unexpected behavior. It’s better to use regular functions if you want to refer to the object’s properties using `this`.
+> Note: **Arrow functions** do **not** bind their own `this` context, which can sometimes cause unexpected behavior. It’s better to use regular functions if you want to refer to the object’s properties using `this`.
 
 #### 3. **Functions as values for any key**
 
@@ -1007,15 +1095,14 @@ Here, `createGreeting` is a function that returns another function, and that ret
 
 ---
 
-### (10.0.3) Limits and Flexibility of JavaScript Objects
+### Limits and Flexibility of JavaScript Objects
 
 JavaScript objects are very flexible and can hold **any data type** as values, including **functions**. Here are some key things to keep in mind:
 
 1. **Objects can hold any data type**:
-    
     - You can store strings, numbers, arrays, other objects, and functions inside an object.
-2. **No strict type constraints**:
     
+2. **No strict type constraints**:
     - JavaScript does not enforce type constraints on the values in objects. So, you could mix numbers, strings, and functions in the same object, like this:
     
     ```javascript
@@ -1030,7 +1117,6 @@ JavaScript objects are very flexible and can hold **any data type** as values, i
     ```
     
 3. **Objects can be dynamic**:
-    
     - You can add or remove properties (keys) from an object at any time:
     
     ```javascript
@@ -1048,36 +1134,53 @@ JavaScript objects are very flexible and can hold **any data type** as values, i
     ```
     
 4. **Methods in objects**:
-    
     - You can define **methods** (functions) within an object, and these functions can reference the object properties using `this`. Just remember that `this` can behave differently in certain cases (like arrow functions).
-5. **Objects can be used to store functions as a kind of "action" map**:
     
+5. **Objects can be used to store functions as a kind of "action" map**:
     - For example, imagine you want to execute different actions based on a type of input. You could store functions in an object and call the appropriate one based on the input.
 
 ---
-### (10.0.4) Looping Through Object Keys and Values Dynamically
+### Looping Through Object Keys and Values Dynamically
 
 When working with objects in JavaScript, you may often need to loop through their keys and values without knowing their names in advance. There are a few ways to accomplish this:
 
-#### 1. **Using `for...in` loop**
+---
+#### 1. Using `for...in` loop
 
-The `for...in` loop allows you to iterate over all the enumerable properties of an object. However, it's important to check if the property is directly on the object and not inherited from its prototype.
+The `for...in` loop is used to iterate over **all enumerable properties** of an object, including properties that are inherited from its prototype.
+
+However, to avoid accidentally accessing inherited properties, you should always check if the property is directly on the object using the `hasOwnProperty()` method.
+
+##### Example:
 
 ```javascript
 const obj = { name: 'Alice', age: 25, city: 'Wonderland' };
 
 for (const key in obj) {
   if (obj.hasOwnProperty(key)) {  // Ensure the key is not inherited
-    console.log(`Key: ${key}, Value: ${obj[key]}`);
+    let value = obj[key];
+    console.log(`Key: ${key}, Value: ${value}`);
   }
 }
 ```
 
-- **`hasOwnProperty(key)`**: This ensures that only properties directly on the object are accessed, not those inherited through the prototype chain.
+- **`hasOwnProperty(key)`**: This ensures that only properties that belong directly to the object (and not to its prototype) are included. Without this, you might loop over properties that are part of the object's prototype chain (inherited properties).
 
-#### 2. **Using `Object.entries()`**
+> **Note:**
+	**Dot notation (`obj.key`)** is used when the property name is fixed and known.
+	**Bracket notation (`obj[key]`)** is used to access properties dynamically or when the property name contains spaces or special characters.
 
-The `Object.entries()` method returns an array of `[key, value]` pairs, which makes it easier to loop through and access both keys and values at the same time.
+##### Key Points:
+
+- The `for...in` loop is suited for iterating over an object's **keys** (property names).
+- The loop iterates over **all enumerable properties**, including those that are inherited through the prototype chain. Always use `hasOwnProperty()` to filter out inherited properties if needed.
+
+---
+#### 2. Using `Object.entries()`
+
+The `Object.entries()` method converts an object into an array of key-value pairs. Each pair is an array where the first element is the property (key), and the second is its corresponding value. This method can be particularly useful when you want to loop through both the key and value together.
+
+##### Example:
 
 ```javascript
 const obj = { name: 'Alice', age: 25, city: 'Wonderland' };
@@ -1087,11 +1190,20 @@ Object.entries(obj).forEach(([key, value]) => {
 });
 ```
 
-- **`Object.entries(obj)`**: Converts the object into an array of key-value pairs that can be iterated over using `forEach` or any other loop structure.
+- **`Object.entries(obj)`**: Returns an array of `[key, value]` pairs. This makes it easy to use methods like `forEach`, or other array-based operations like `map()`, `filter()`, etc., to manipulate the data.
 
-#### 3. **Using `for...of` with `Object.entries()`**
+##### Key Points:
 
-Alternatively, you can use a `for...of` loop with `Object.entries()` for better readability and control over the iteration.
+- **`Object.entries()`** gives you both keys and values in a clean, iterable format, making it ideal for looping through all properties and their associated values.
+- It is particularly useful when you need to perform operations with both the **key** and **value**.
+
+---
+
+#### 3. Using `for...of` with `Object.entries()`
+
+The `for...of` loop is typically used for iterating over **iterables** like arrays, and it can be used with `Object.entries()` to provide a cleaner, more readable loop over key-value pairs.
+
+##### Example:
 
 ```javascript
 const obj = { name: 'Alice', age: 25, city: 'Wonderland' };
@@ -1101,13 +1213,28 @@ for (const [key, value] of Object.entries(obj)) {
 }
 ```
 
-#### Key Takeaways:
+- **`for...of`**: This loop is used with `Object.entries()` to iterate over the resulting array of `[key, value]` pairs. It is cleaner than `for...in` because it avoids manually checking the prototype chain and directly gives you access to the key-value pairs.
 
-- **`for...in` loop**: Allows you to loop over all keys in the object (including inherited ones, so you may need to use `hasOwnProperty`).
-- **`Object.entries()`**: Converts the object into an array of key-value pairs, allowing you to loop over them with a more concise approach. It is cleaner when you need both the key and value.
+##### Key Points:
+
+- The **`for...of`** loop is ideal for iterating over arrays or iterable objects (like the array returned by `Object.entries()`).
+- It's a more modern and readable alternative to `for...in` when you need both the **key and value** from an object.
 
 ---
-### (10.0.5) Methods for Objects in JavaScript
+
+#### Key Takeaways:
+
+- **`for...in` loop**: Iterates over all **enumerable** properties (including those inherited via the prototype chain). It's useful for objects but requires caution with inherited properties, so always check with `hasOwnProperty()`.
+- **`Object.entries()`**: Converts an object into an array of `[key, value]` pairs, making it easy to iterate through both the key and value. This method is cleaner and easier to work with than using `for...in` in some cases.
+- **`for...of`**: Ideal for iterating over arrays or other iterables. When combined with `Object.entries()`, it offers a more readable and modern way to loop through objects and access both the keys and values.
+
+---
+>**Just remember!**
+>  1. for (every prop in objects) { // do this } *objects - enumerable*
+>  2. for (every item of array) { // do this } *arrays - iterable**
+
+---
+### Methods for Objects in JavaScript
 
 In JavaScript, objects come with a variety of built-in methods that help you manipulate and work with them efficiently. Below are some common and useful methods for working with objects:
 
@@ -1273,6 +1400,27 @@ These methods make working with objects more powerful and flexible, allowing for
 - **Arrow functions** may behave differently than regular functions because they don’t bind their own `this` context.
 - JavaScript objects are **flexible** and allow for dynamic changes (you can add, modify, or delete properties).
 - There's no hard limit on the types of values you can store in an object, and you can mix and match different data types (including functions).
+---
+## **10. Events and DOM Manipulation**
+### (10.0) JavaScript Basics Recap:
+
+Before diving into objects and functions as values, let’s quickly review the basic data types:
+
+1. **Primitive Types**:
+    - **String**: e.g., `"Hello"`
+    - **Number**: e.g., `123`
+    - **Boolean**: e.g., `true`, `false`
+    - **null**: special value representing "no value"
+    - **undefined**: represents an uninitialized variable
+    - **Symbol**: used to create unique identifiers
+    - **BigInt**: large integers (e.g., `1234567890123456789012345678901234567890n`)
+
+2. **Complex Types**:
+    - **Object**: a collection of key-value pairs
+    - **Array**: a special kind of object used for ordered data
+
+Now let’s focus on **functions** and **objects**.
+
 ---
 ### (10.1) Event Listener:
 
