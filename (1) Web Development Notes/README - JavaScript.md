@@ -1,4 +1,133 @@
 # **Introduction to JavaScript**
+## **0. Common Methods**
+### 1. String Methods
+
+| Method                 | Description                                                                         | Example                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `.charAt(index)`       | Returns the character at the specified index.                                       | `let str = "Hello"; console.log(str.charAt(1)); // Output: "e"`                       |
+| `.concat()`            | Combines two or more strings.                                                       | `let str = "Hello"; console.log(str.concat(" World")); // Output: "Hello World"`      |
+| `.includes(substring)` | Checks if the string contains the specified substring.                              | `let str = "Hello"; console.log(str.includes("ell")); // Output: true`                |
+| `.indexOf(substring)`  | Returns the index of the first occurrence of a substring.                           | `let str = "Hello"; console.log(str.indexOf("l")); // Output: 2`                      |
+| `.length`              | Returns the length of the string.                                                   | `let str = "Hello"; console.log(str.length); // Output: 5`                            |
+| `.replace(old, new)`   | Replaces a substring with a new substring.                                          | `let str = "Hello"; console.log(str.replace("l", "L")); // Output: "HeLlo"`           |
+| `.slice(start, end)`   | Extracts a part of the string between two indices.                                  | `let str = "Hello"; console.log(str.slice(1, 4)); // Output: "ell"`                   |
+| `.split(separator)`    | Splits a string into an array of substrings.                                        | `let str = "Hello World"; console.log(str.split(" ")); // Output: ["Hello", "World"]` |
+| `.toLowerCase()`       | Converts the string to lowercase.                                                   | `let str = "Hello"; console.log(str.toLowerCase()); // Output: "hello"`               |
+| `.toUpperCase()`       | Converts the string to uppercase.                                                   | `let str = "Hello"; console.log(str.toUpperCase()); // Output: "HELLO"`               |
+| `.trim()`              | Removes whitespace from both ends of the string.                                    | `let str = " Hello "; console.log(str.trim()); // Output: "Hello"`                    |
+| `.repeat(count)`       | Returns a new string with the original string repeated a specified number of times. | `let str = "Hello"; console.log(str.repeat(3)); // Output: "HelloHelloHello"`         |
+
+---
+### 2. Array Methods
+
+|Method|Description|Example|
+|---|---|---|
+|`.push(item)`|Adds an item to the end of the array.|`let arr = [1, 2]; arr.push(3); console.log(arr); // Output: [1, 2, 3]`|
+|`.pop()`|Removes the last item from the array.|`let arr = [1, 2, 3]; arr.pop(); console.log(arr); // Output: [1, 2]`|
+|`.shift()`|Removes the first item from the array.|`let arr = [1, 2, 3]; arr.shift(); console.log(arr); // Output: [2, 3]`|
+|`.unshift(item)`|Adds an item to the beginning of the array.|`let arr = [2, 3]; arr.unshift(1); console.log(arr); // Output: [1, 2, 3]`|
+|`.concat()`|Combines two or more arrays.|`let arr1 = [1, 2]; let arr2 = [3, 4]; console.log(arr1.concat(arr2)); // Output: [1, 2, 3, 4]`|
+|`.join(separator)`|Combines all array elements into a string, separated by a string.|`let arr = ["Hello", "World"]; console.log(arr.join(" ")); // Output: "Hello World"`|
+|`.slice(start, end)`|Returns a shallow copy of a portion of the array.|`let arr = [1, 2, 3, 4]; console.log(arr.slice(1, 3)); // Output: [2, 3]`|
+|`.splice(start, count)`|Adds/removes items from an array at a specified index.|`let arr = [1, 2, 3, 4]; arr.splice(2, 1, "a", "b"); console.log(arr); // Output: [1, 2, "a", "b", 4]`|
+|`.forEach(callback)`|Executes a function for each array element.|`let arr = [1, 2, 3]; arr.forEach(num => console.log(num * 2)); // Output: 2, 4, 6`|
+|`.map(callback)`|Creates a new array from the results of calling a function on every element.|`let arr = [1, 2, 3]; console.log(arr.map(num => num * 2)); // Output: [2, 4, 6]`|
+|`.filter(callback)`|Creates a new array with elements that pass the test.|`let arr = [1, 2, 3, 4]; console.log(arr.filter(num => num > 2)); // Output: [3, 4]`|
+|`.reduce(callback)`|Reduces an array to a single value using a function.|`let arr = [1, 2, 3, 4]; console.log(arr.reduce((acc, num) => acc + num, 0)); // Output: 10`|
+|`.find(callback)`|Returns the first element that satisfies the condition.|`let arr = [1, 2, 3, 4]; console.log(arr.find(num => num > 2)); // Output: 3`|
+|`.includes(value)`|Checks if the array contains a specific value.|`let arr = [1, 2, 3]; console.log(arr.includes(2)); // Output: true`|
+
+---
+### 3. Object Methods
+
+|Method|Description|Example|
+|---|---|---|
+|`Object.keys(obj)`|Returns an array of a given object's property names.|`let obj = { a: 1, b: 2 }; console.log(Object.keys(obj)); // Output: ["a", "b"]`|
+|`Object.values(obj)`|Returns an array of a given object's property values.|`let obj = { a: 1, b: 2 }; console.log(Object.values(obj)); // Output: [1, 2]`|
+|`Object.entries(obj)`|Returns an array of key-value pairs for the object.|`let obj = { a: 1, b: 2 }; console.log(Object.entries(obj)); // Output: [["a", 1], ["b", 2]]`|
+|`Object.assign(target, source)`|Copies properties from one or more objects to a target object.|`let obj1 = { a: 1 }; let obj2 = { b: 2 }; Object.assign(obj1, obj2); console.log(obj1); // Output: { a: 1, b: 2 }`|
+|`Object.freeze(obj)`|Prevents modification of an object (immutable).|`let obj = { a: 1 }; Object.freeze(obj); obj.a = 2; console.log(obj); // Output: { a: 1 }`|
+|`Object.seal(obj)`|Prevents adding new properties, but allows modification.|`let obj = { a: 1 }; Object.seal(obj); obj.b = 2; console.log(obj); // Output: { a: 1 }`|
+
+---
+### 4. Number Methods
+
+|Method|Description|Example|
+|---|---|---|
+|`Number.isFinite(value)`|Checks if the value is a finite number.|`console.log(Number.isFinite(100)); // Output: true`|
+|`Number.isNaN(value)`|Checks if the value is NaN.|`console.log(Number.isNaN("hello")); // Output: true`|
+|`.toFixed(digits)`|Formats a number to a fixed number of decimal places.|`let num = 3.14159; console.log(num.toFixed(2)); // Output: "3.14"`|
+|`.toPrecision(precision)`|Formats a number to a specified precision.|`let num = 3.14159; console.log(num.toPrecision(3)); // Output: "3.14"`|
+
+---
+### 5. Math Methods
+
+|Method|Description|Example|
+|---|---|---|
+|`Math.abs(x)`|Returns the absolute value of a number.|`console.log(Math.abs(-5)); // Output: 5`|
+|`Math.ceil(x)`|Rounds a number up to the nearest integer.|`console.log(Math.ceil(4.2)); // Output: 5`|
+|`Math.floor(x)`|Rounds a number down to the nearest integer.|`console.log(Math.floor(4.8)); // Output: 4`|
+|`Math.max(x, y, ...)`|Returns the largest number among the given numbers.|`console.log(Math.max(1, 2, 3)); // Output: 3`|
+|`Math.min(x, y, ...)`|Returns the smallest number among the given numbers.|`console.log(Math.min(1, 2, 3)); // Output: 1`|
+|`Math.random()`|Returns a random number between 0 and 1.|`console.log(Math.random()); // Output: A random number between 0 and 1`|
+|`Math.round(x)`|Rounds a number to the nearest integer.|`console.log(Math.round(4.5)); // Output: 5`|
+|`Math.sqrt(x)`|Returns the square root of a number.|`console.log(Math.sqrt(9)); // Output: 3`|
+
+---
+### 6. Date Methods
+
+|Method|Description|Example|
+|---|---|---|
+|`.getDate()`|Returns the day of the month (1–31).|`let date = new Date(); console.log(date.getDate()); // Output: Day of the month`|
+|`.getDay()`|Returns the day of the week (0–6).|`let date = new Date(); console.log(date.getDay()); // Output: Day of the week (0-6)`|
+|`.getFullYear()`|Returns the year (4 digits).|`let date = new Date(); console.log(date.getFullYear()); // Output: Year`|
+|`.getHours()`|Returns the hour (0–23).|`let date = new Date(); console.log(date.getHours()); // Output: Hour`|
+|`.getMilliseconds()`|Returns the milliseconds (0–999).|`let date = new Date(); console.log(date.getMilliseconds()); // Output: Milliseconds`|
+|`.getMinutes()`|Returns the minutes (0–59).|`let date = new Date(); console.log(date.getMinutes()); // Output: Minutes`|
+|`.getSeconds()`|Returns the seconds (0–59).|`let date = new Date(); console.log(date.getSeconds()); // Output: Seconds`|
+|`.setDate(day)`|Sets the day of the month.|`let date = new Date(); date.setDate(15); console.log(date); // Output: Updated date`|
+|`.setFullYear(year)`|Sets the year.|`let date = new Date(); date.setFullYear(2025); console.log(date); // Output: Updated year`|
+|`.setHours(hours)`|Sets the hour.|`let date = new Date(); date.setHours(10); console.log(date); // Output: Updated hour`|
+|`.setMilliseconds(ms)`|Sets the milliseconds.|`let date = new Date(); date.setMilliseconds(500); console.log(date); // Output: Updated milliseconds`|
+|`.setMinutes(minutes)`|Sets the minutes.|`let date = new Date(); date.setMinutes(30); console.log(date); // Output: Updated minutes`|
+|`.setSeconds(seconds)`|Sets the seconds.|`let date = new Date(); date.setSeconds(45); console.log(date); // Output: Updated seconds`|
+
+---
+### 7. Set Methods
+
+|Method|Description|Example|
+|---|---|---|
+|`.add(value)`|Adds a value to the set.|`let set = new Set(); set.add(1); console.log(set); // Output: Set {1}`|
+|`.delete(value)`|Deletes a value from the set.|`let set = new Set([1, 2, 3]); set.delete(2); console.log(set); // Output: Set {1, 3}`|
+|`.has(value)`|Checks if a value exists in the set.|`let set = new Set([1, 2, 3]); console.log(set.has(2)); // Output: true`|
+|`.clear()`|Removes all elements from the set.|`let set = new Set([1, 2, 3]); set.clear(); console.log(set); // Output: Set {}`|
+|`.size`|Returns the number of elements in the set.|`let set = new Set([1, 2, 3]); console.log(set.size); // Output: 3`|
+
+---
+### 8. Map Methods
+
+|Method|Description|Example|
+|---|---|---|
+|`.set(key, value)`|Sets the value for a specified key.|`let map = new Map(); map.set("a", 1); console.log(map); // Output: Map {"a" => 1}`|
+|`.get(key)`|Retrieves the value for a specified key.|`let map = new Map([["a", 1]]); console.log(map.get("a")); // Output: 1`|
+|`.delete(key)`|Deletes a specified key-value pair.|`let map = new Map([["a", 1]]); map.delete("a"); console.log(map); // Output: Map {}`|
+|`.has(key)`|Checks if a key exists in the map.|`let map = new Map([["a", 1]]); console.log(map.has("a")); // Output: true`|
+|`.clear()`|Removes all key-value pairs from the map.|`let map = new Map([["a", 1], ["b", 2]]); map.clear(); console.log(map); // Output: Map {}`|
+|`.size`|Returns the number of key-value pairs in the map.|`let map = new Map([["a", 1], ["b", 2]]); console.log(map.size); // Output: 2`|
+
+---
+### 9. Function Methods
+
+|Method|Description|Example|
+|---|---|---|
+|`.apply(thisArg, [argsArray])`|Calls a function with a specified `this` value and arguments passed as an array.|`function greet(greeting, punctuation) { console.log(`${greeting}, ${this.name}${punctuation}`); } let person = { name: 'John' }; greet.apply(person, ['Hello', '!']); // Output: "Hello, John!"`|
+|`.call(thisArg, arg1, arg2, ...)`|Calls a function with a specified `this` value and arguments passed individually.|`function greet(greeting, punctuation) { console.log(`${greeting}, ${this.name}${punctuation}`); } let person = { name: 'John' }; greet.call(person, 'Hello', '!'); // Output: "Hello, John!"`|
+|`.bind(thisArg, arg1, arg2, ...)`|Returns a new function that, when called, has its `this` value set to the specified value, and prepends the provided arguments.|`function greet(greeting, punctuation) { console.log(`${greeting}, ${this.name}${punctuation}`); } let person = { name: 'John' }; let greetJohn = greet.bind(person, 'Hello'); greetJohn('!'); // Output: "Hello, John!"`|
+|`.toString()`|Returns a string representing the source code of the function.|`function add(a, b) { return a + b; } console.log(add.toString()); // Output: "function add(a, b) { return a + b; }"`|
+|`.length`|Returns the number of arguments expected by the function.|`function greet(name, age) { console.log(name, age); } console.log(greet.length); // Output: 2`|
+
+---
+
 
 ## **1. What is JavaScript?**
 
@@ -66,8 +195,7 @@ let name = "John";  // String
 const age = 30;      // Number
 let isActive = true; // Boolean
 ```
-
-
+---
 ### JavaScript Comparisons
 
 | Operator | Description                                 |
@@ -80,158 +208,28 @@ let isActive = true; // Boolean
 | `>`      | Greater than                                |
 | `<`      | Less than                                   |
 
-### Comparison Operators
-
-- **Equality:**
-
-- `==` checks for loose equality (performs type coercion).
-
-```javascript
-
-3 == "3"; // true, because the types are coerced.
-
-```
-
-- `===` checks for strict equality (no type coercion).
-
-```javascript
-
-3 === "3"; // false, because the types differ.
-
-```
-
-Examples:
-```javascript
-3 == "3"     // true (loose equality)
-3 === "3"    // false (strict equality)
-```
-### **JavaScript Logical Operators**
+---
+### JavaScript Logical Operators
 
 | Operator | Description |
 | -------- | ----------- |
 | `&&`     | Logical AND |
-| ` \|\| ` | Logical OR  |
+| `\|\|`   | Logical OR  |
 | `!`      | Logical NOT |
-### **Outputting Results Using Logical OR (`||`)**
-
-#### **Shortened Method for FizzBuzz Example**:
-
-```javascript
-for (let i = 1; i <= 50; i++) {
-    let output = '';
-    if (i % 3 === 0) output += 'Fizz';
-    if (i % 5 === 0) output += 'Buzz';
-    console.log(output || i);
-}
-```
-
-- **Explanation of `output || i`**:
-    - The expression `output || i` is a **logical OR** operation. It checks if `output` is a non-empty string.
-    - **If `output` is not empty** (meaning `i` is divisible by 3 or 5), it will print the value of `output` (which will be either `"Fizz"`, `"Buzz"`, or `"FizzBuzz"`).
-    - **If `output` is empty** (meaning `i` is neither divisible by 3 nor 5), it will print the value of `i` instead.
-    - This allows you to combine checking conditions and outputting values more efficiently in one line. The logical OR (`||`) ensures that `i` is used as a fallback when `output` is empty.
-
----
-
-##### Why This is Useful:
-
-- **Concise Code**: Instead of having multiple `if-else` statements to handle the different cases, you can create the result string (`output`) and use it directly. This reduces the need for complex branching logic.
-- **Fallback Value**: The `||` operator provides a quick way to default to `i` if there’s no "Fizz" or "Buzz" for that number.
-
----
----
-Examples:
-```javascript
-true && false   // false
-true || false   // true
-!true           // false
-```
-
-### JavaScript Types
-
-JavaScript has different data types, which include both primitive and complex types:
-
-1. **Number**  
-   Used for both integers and floating-point numbers.
-
-   Examples:
-   ```javascript
-   10 + 2    // 12
-   10 - 2    // 8
-   2 * 2     // 4
-   10 / 2    // 5
-   10 % 3    // 1 (modulus: remainder of division)
-   ```
-
-2. **String**  
-   A sequence of characters used to represent text.
-
-   Examples:
-   ```javascript
-   "Hello" + "world!"    // "Helloworld!"
-   "Hello " + "world!"   // "Hello world!"
-   'This isn\'t very nice'  // Correct handling of single quote
-   10 + "34"    // "1034" (string concatenation)
-   10 - "7"     // 3 (implicit type conversion)
-   "hello" - "bye"  // NaN (Not a Number, invalid operation)
-   ```
-   
-3. **Boolean**  
-   Represents logical entities with two values: `true` or `false`.
-
-   Examples:
-   ```javascript
-   3 > 2         // true
-   5 >= 5        // true
-   3 === 3       // true (strict equality)
-   3 !== 3       // false (strict inequality)
-   
-   true + true   // 2 (true is treated as 1)
-   false + true  // 1
-   "A" > "B"     // false (lexical comparison)
-   "a" > "A"     // true (lowercase is greater)
-   ```
-
-4. **Undefined**  
-   A variable that has been declared but not yet assigned a value.
-
-   Example:
-   ```javascript
-   var x;
-   console.log(x);    // undefined
-   ```
-
-5. **Null**  
-   Represents an intentional absence of any value.
-
-6. **Symbol** (introduced in ECMAScript 6)  
-   A unique and immutable primitive value often used as the key for object properties.
-
-7. **Object**  
-   A collection of key-value pairs, where keys are strings or symbols, and values can be of any type.
-
-   Example:
-   ```javascript
-   var user = {
-     name: "John",
-     age: 24,
-     hobby: "soccer"
-   };
-   ```
 
 ---
 ### JavaScript Data Types:
 
-|Data Type|Example|Description|
-|---|---|---|
-|**String**|`"Hello"`|Sequence of characters|
-|**Number**|`10`, `3.14`|Numeric values|
-|**Boolean**|`true`, `false`|Logical value (true or false)|
-|**Array**|`[1, 2, 3]`|Ordered collection of values|
-|**Object**|`{name: "John", age: 30}`|Collection of key-value pairs|
-|**Null**|`null`|Represents an empty or non-existent value|
-|**Undefined**|`undefined`|Represents an uninitialized variable|
-### **`undefined` in JavaScript**
+| Data Type     | Example                   | Description                               |
+| ------------- | ------------------------- | ----------------------------------------- |
+| **String**    | `"Hello"`                 | Sequence of characters                    |
+| **Number**    | `10`, `3.14`              | Numeric values                            |
+| **Boolean**   | `true`, `false`           | Logical value (true or false)             |
+| **Array**     | `[1, 2, 3]`               | Ordered collection of values              |
+| **Object**    | `{name: "John", age: 30}` | Collection of key-value pairs             |
+| **Null**      | `null`                    | Represents an empty or non-existent value |
+| **Undefined** | `undefined`               | Represents an uninitialized variable      |
+#### **`undefined` in JavaScript**
 
 In JavaScript, **`undefined`** is a **primitive value** that represents the absence of a value. However, it’s used a little differently than `null` in other languages.
 
@@ -273,7 +271,7 @@ In JavaScript, **`undefined`** is a **primitive value** that represents the abse
 
 ---
 
-### **`null` in JavaScript**
+#### **`null` in JavaScript**
 
 On the other hand, **`null`** is another special value, but it is used to indicate the **intentional absence of any object value**. It is often used when you want to explicitly set a variable to "no value" or "empty."
 
@@ -291,7 +289,7 @@ On the other hand, **`null`** is another special value, but it is used to indica
 
 ---
 
-### **Why does JavaScript use `undefined`?**
+#### **Why does JavaScript use `undefined`?**
 
 JavaScript's choice of **`undefined`** serves as a way to represent a **variable that exists but has not been assigned any value yet**. In some ways, it can be seen as a built-in indicator that the variable was intentionally **not initialized**, rather than an accidental absence of value like `null` might suggest.
 
@@ -300,7 +298,7 @@ JavaScript's choice of **`undefined`** serves as a way to represent a **variable
 
 ---
 
-### **In Conclusion**:
+#### **In Conclusion**:
 
 - **`undefined`** is a built-in JavaScript value that typically means a variable or property has been declared but not assigned a value.
 - **`null`** is used to explicitly indicate that a variable or object reference is intentionally empty.
@@ -317,6 +315,118 @@ if (x === null) {
   // Handle null
 }
 ```
+--- 
+### Spread Operator (`...`) in JavaScript
+
+#### What is it?
+
+- The **spread operator** (`...`) is used to **expand or unpack** elements from an **array** or **object** into individual elements or properties.
+- It is an **operator**, similar to other operators like `+`, `-`, etc., but specifically designed for **arrays** and **objects**.
+
+#### Key Characteristics:
+
+- **Syntax**: `...`
+- **Used with**: Arrays, Objects, and Iterables.
+- **Does not create a new data type**—it just allows unpacking or spreading the elements of existing iterables.
+- **It’s not a method or function**, but a syntactic feature in JavaScript.
+
+---
+
+#### Common Use Cases for the Spread Operator:
+
+1. **Spreading elements of an array into a new array**:
+    
+    - Useful when copying an array or adding new elements to it.
+    
+    ```javascript
+    let arr = [1, 2, 3];
+    let newArr = [...arr, 4]; // Spread elements of arr and add 4
+    console.log(newArr);  // [1, 2, 3, 4]
+    ```
+    
+2. **Spreading properties of an object into a new object**:
+    
+    - Useful for copying an object or merging objects.
+    
+    ```javascript
+    let obj = { a: 1, b: 2 };
+    let newObj = { ...obj, c: 3 };  // Spread properties of obj and add c: 3
+    console.log(newObj);  // {a: 1, b: 2, c: 3}
+    ```
+    
+3. **Function arguments**:
+    
+    - The spread operator can be used to pass elements of an array as individual arguments to a function.
+    
+    ```javascript
+    let numbers = [1, 2, 3];
+    console.log(Math.max(...numbers));  // Spread numbers into individual arguments
+    ```
+    
+4. **Combining arrays**:
+    
+    - You can combine multiple arrays by spreading them into a new array.
+    
+    ```javascript
+    let arr1 = [1, 2];
+    let arr2 = [3, 4];
+    let combinedArr = [...arr1, ...arr2];  // Combines both arrays
+    console.log(combinedArr);  // [1, 2, 3, 4]
+    ```
+    
+5. **Cloning an array or object**:
+    
+    - You can use the spread operator to make a shallow copy of an array or object.
+    
+    ```javascript
+    let arr = [1, 2, 3];
+    let cloneArr = [...arr];  // Creates a shallow copy
+    console.log(cloneArr);  // [1, 2, 3]
+    ```
+    
+
+---
+
+#### How it works:
+
+- **Arrays**: The spread operator expands the elements of an array into individual items.
+    
+    ```javascript
+    let arr = [1, 2, 3];
+    console.log(...arr);  // Outputs: 1 2 3 (as separate arguments)
+    ```
+    
+- **Objects**: The spread operator copies all enumerable properties from the original object into a new object.
+    
+    ```javascript
+    let obj = {a: 1, b: 2};
+    let newObj = {...obj};  // Copies properties from obj into newObj
+    console.log(newObj);  // {a: 1, b: 2}
+    ```
+    
+
+---
+
+#### When Not to Use the Spread Operator:
+
+1. **For deep cloning**: The spread operator only performs a shallow copy. It won't deeply clone nested objects or arrays. To clone deeply, use a custom function or libraries like `lodash`.
+2. **With non-iterables**: The spread operator works only with **iterables** like arrays, strings, or objects, so using it on non-iterables will cause an error.
+
+---
+
+### Comparison with Other Operators:
+
+- **Arithmetic Operators** (`+`, `-`, etc.): Used for basic math operations.
+- **Spread Operator (`...`)**: Used for unpacking values from arrays and objects into individual elements or properties.
+
+---
+
+### Summary:
+
+- The **spread operator** (`...`) is a JavaScript **operator** used to unpack or expand elements from **arrays** or **objects**.
+- It can be used for **copying**, **combining**, and **spreading** values efficiently.
+- It is **not a data type** but a syntactic feature for working with **iterables**.
+
 ---
 ## **5. Functions**
 

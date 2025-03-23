@@ -2,20 +2,20 @@
 ---
 # **Section-0: Introduction to CSS**
 
-## **1. What is CSS?**
+## 1. What is CSS?
 
 - **CSS** stands for **Cascading Style Sheets**.
 - It is used to control the **layout**, **style**, and **appearance** of a web page.
 - CSS works alongside **HTML** to define the visual presentation of a webpage by styling the HTML elements (like text, images, and sections).
 
-## **2. Why Use CSS?**
+## 2. Why Use CSS?
 
 - **Separation of Concerns**: CSS separates the content of the webpage (HTML) from its design, making it easier to maintain and update.
 - **Consistency**: CSS allows you to apply the same styles to multiple pages of a website, ensuring a consistent look and feel.
 - **Flexibility**: CSS provides a lot of flexibility, allowing you to adjust the layout, fonts, colors, spacing, and even animations without changing the HTML structure.
 - **Responsiveness**: CSS helps in creating layouts that adapt to different screen sizes (e.g., mobile, tablet, desktop).
 
-## **3. CSS Syntax**
+## 3. CSS Syntax
 
 ### Basic Structure of a CSS Rule:
 
@@ -42,7 +42,7 @@ h1 {
 
 ---
 
-## **4. How CSS Can Be Applied**
+## 4. How CSS Can Be Applied
 
 There are three ways to apply CSS to a webpage:
 
@@ -83,7 +83,7 @@ There are three ways to apply CSS to a webpage:
 
 ---
 
-## **5. CSS Selectors**
+## 5. CSS Selectors
 
 CSS selectors are used to target HTML elements that you want to style. Some basic selectors include:
 
@@ -131,7 +131,7 @@ CSS selectors are used to target HTML elements that you want to style. Some basi
 
 ---
 
-## **6. Common CSS Properties**
+## 6. Common CSS Properties
 
 - **Color and Background**:
     
@@ -153,7 +153,7 @@ CSS selectors are used to target HTML elements that you want to style. Some basi
 
 ---
 
-## **7. Box Model**
+## 7. Box Model
 
 - The CSS **box model** is a fundamental concept that defines the layout structure of an element, consisting of:
     1. **Content**: The actual content of the element (text, images, etc.).
@@ -178,42 +178,261 @@ div {
 
 ---
 
-## **8. Comments in CSS**
 
-- Comments in CSS allow you to add notes to your code without affecting the styling.
+# **Section-1: CSS Grid Layouts**
+## Intro to Grids
+### What is CSS Grid?
+
+- **CSS Grid Layout** is a powerful two-dimensional layout system for the web, enabling control over both rows and columns.
+- It simplifies the creation of complex layouts and enhances flexibility, allowing for more organized and efficient design when compared to traditional methods like floats or positioning.
+
+---
+
+### Basic Terminology
+
+1. **Grid Container**: The parent element that defines the grid layout. It's created by applying `display: grid` to an element.
+    
+    ```css
+    .container {
+      display: grid;
+    }
+    ```
+    
+2. **Grid Items**: Direct children of the grid container, which will be placed within the grid cells.
+    
+3. **Grid Lines**: Horizontal and vertical lines that divide the grid, functioning as boundaries for positioning grid items.
+    
+4. **Grid Tracks**: The space between two adjacent grid lines, either for rows or columns.
+    
+5. **Grid Cells**: The smallest unit in the grid, formed by the intersection of a row and a column.
+    
+6. **Grid Areas**: The rectangular space between four grid lines, potentially spanning multiple cells.
+
+---
+### CSS Grid properties
+
+|**Property**|**Description**|**Example**|
+|---|---|---|
+|**`display`**|Defines the container as a grid container.|`display: grid;`|
+|**`grid-template-columns`**|Defines the number and size of columns in the grid.|`grid-template-columns: 100px 1fr 2fr;`|
+|**`grid-template-rows`**|Defines the number and size of rows in the grid.|`grid-template-rows: 50px 200px;`|
+|**`grid-template-areas`**|Defines named grid areas that can be used to position grid items.|`grid-template-areas: "header header" "main sidebar" "footer footer";`|
+|**`grid-column`**|Specifies the position of a grid item within columns (start and end).|`grid-column: 1 / 3;`|
+|**`grid-row`**|Specifies the position of a grid item within rows (start and end).|`grid-row: 1 / 2;`|
+|**`grid-column-start`**|Defines the starting point of a grid item in the column.|`grid-column-start: 2;`|
+|**`grid-column-end`**|Defines the ending point of a grid item in the column.|`grid-column-end: 4;`|
+|**`grid-row-start`**|Defines the starting point of a grid item in the row.|`grid-row-start: 1;`|
+|**`grid-row-end`**|Defines the ending point of a grid item in the row.|`grid-row-end: 3;`|
+|**`grid-area`**|A shorthand property for setting `grid-row-start`, `grid-column-start`, `grid-row-end`, and `grid-column-end`.|`grid-area: 1 / 1 / 3 / 4;`|
+|**`grid-auto-columns`**|Defines the size of implicitly created columns.|`grid-auto-columns: 100px;`|
+|**`grid-auto-rows`**|Defines the size of implicitly created rows.|`grid-auto-rows: 50px;`|
+|**`grid-auto-flow`**|Specifies the auto-placement algorithm, determining how grid items are placed when they are not explicitly placed.|`grid-auto-flow: row;`|
+|**`justify-items`**|Aligns all items horizontally within their grid area.|`justify-items: center;`|
+|**`align-items`**|Aligns all items vertically within their grid area.|`align-items: start;`|
+|**`justify-self`**|Aligns a single grid item horizontally within its grid area.|`justify-self: stretch;`|
+|**`align-self`**|Aligns a single grid item vertically within its grid area.|`align-self: center;`|
+|**`gap`**|Defines the gap (space) between grid rows and columns.|`gap: 20px;`|
+|**`row-gap`**|Defines the gap between rows.|`row-gap: 10px;`|
+|**`column-gap`**|Defines the gap between columns.|`column-gap: 15px;`|
+|**`justify-content`**|Aligns the entire grid container horizontally when it has extra space.|`justify-content: center;`|
+|**`align-content`**|Aligns the entire grid container vertically when it has extra space.|`align-content: space-between;`|
+|**`place-items`**|A shorthand for `align-items` and `justify-items`.|`place-items: center;`|
+|**`place-self`**|A shorthand for `align-self` and `justify-self`.|`place-self: end;`|
+|**`grid`**|A shorthand for defining `grid-template-columns`, `grid-template-rows`, `grid-template-areas`, and `gap`.|`grid: 1fr 2fr / auto 200px;`|
+|**`grid-template`**|A shorthand for defining `grid-template-rows`, `grid-template-columns`, and `grid-template-areas`.|`grid-template: 100px 1fr / auto;`|
+|**`grid-column-gap`**|Same as `column-gap`.|`grid-column-gap: 20px;`|
+|**`grid-row-gap`**|Same as `row-gap`.|`grid-row-gap: 10px;`|
+
+---
+
+#### Key Points:
+
+- **`grid-template-columns`** and **`grid-template-rows`** define the grid structure.
+- **`grid-column`**, **`grid-row`** define item positions.
+- **`grid-template-areas`** is useful for naming grid areas for more readable layouts.
+- **Alignment properties** (like **`justify-items`**, **`align-items`**, **`justify-self`**, **`align-self`**) control alignment within grid items.
+- **`gap`** defines spacing between rows and columns.
+- **Shorthand properties** like **`grid`**, **`grid-template`**, **`place-items`**, and **`place-self`** help simplify your CSS.
+
+---
+### Creating a Basic Grid
+
+- To create a grid, apply `display: grid` to a container element.
 
 ```css
-/* This is a single-line comment */
-
-/* 
-   This is a multi-line comment
-   that spans multiple lines
-*/
+.container {
+  display: grid;
+}
 ```
 
 ---
 
-## **9. CSS Cascading and Specificity**
+### Defining Columns and Rows
 
-- **Cascading**: CSS follows a specific order of precedence (cascading). When multiple rules apply to the same element, the most specific rule wins.
-- **Specificity**: Rules with more specific selectors (e.g., ID selectors) override rules with less specific selectors (e.g., class selectors).
+- Use `grid-template-columns` and `grid-template-rows` to define the structure of the grid.
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 100px 200px 100px; /* 3 columns */
+  grid-template-rows: 50px 150px; /* 2 rows */
+}
+```
+
+- You can also use fractional units (`fr`) for responsive layouts:
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* 2 columns, the second takes twice the space */
+}
+```
 
 ---
 
-## **Key Concepts Covered**
+### Grid Gap
 
-- **CSS**: A language used to style and design HTML elements.
-- **CSS Syntax**: Structure of selectors, properties, and values.
-- **Selectors**: Ways to target HTML elements for styling.
-- **CSS Properties**: Common properties for color, layout, typography, and more.
-- **Box Model**: Understanding how the space around elements is calculated.
-- **Comments**: Writing comments for clarity and maintenance.
+- **`grid-gap`** or **`gap`** defines the space between grid items (both rows and columns).
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px; /* 20px gap between grid items */
+}
+```
 
 ---
----
-# **Section-1: CSS Grid Layout**
 
-## **1. Global Reset and Box-Sizing**
+### Placing Grid Items
+
+- By default, grid items will flow into the grid. However, you can control their positioning with:
+    
+    - **`grid-column`**: Specifies the start and end of a grid item along the columns.
+    - **`grid-row`**: Specifies the start and end of a grid item along the rows.
+
+```css
+.item {
+  grid-column: 1 / 3; /* Spans from column 1 to column 3 */
+  grid-row: 1 / 2; /* Spans from row 1 to row 2 */
+}
+```
+
+- You can also use shorthand for both row and column placement:
+
+```css
+.item {
+  grid-area: 1 / 1 / 2 / 3; /* shorthand for grid-row-start, grid-column-start, grid-row-end, grid-column-end */
+}
+```
+
+---
+
+### Naming Grid Areas
+
+- You can name specific grid areas and assign grid items to those areas by referring to their names.
+
+```css
+.container {
+  display: grid;
+  grid-template-areas: 
+    "header header header"
+    "main main sidebar"
+    "footer footer footer";
+}
+
+.header {
+  grid-area: header;
+}
+.main {
+  grid-area: main;
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.footer {
+  grid-area: footer;
+}
+```
+
+---
+
+## Responsive Grid Layouts
+### Media Queries
+- Use `@media` queries to create responsive layouts. You can adjust the number of columns or their size based on the screen size.
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr; /* Single column layout on small screens */
+  }
+}
+```
+
+---
+
+### Auto-fill and Auto-fit
+
+- **`auto-fill`**: Fills the grid with as many columns as can fit in the container.
+- **`auto-fit`**: Similar to `auto-fill`, but the last column stretches to fill the remaining space if there’s less content.
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+```
+
+---
+
+### Implicit Grid
+
+- If grid items exceed the defined rows or columns, they will be placed in an implicit grid. You can control the implicit grid with `grid-auto-rows` and `grid-auto-columns`.
+
+```css
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 100px; /* Automatically adds rows of 100px when more items are present */
+}
+```
+
+---
+
+### Aligning Items within Grid Cells
+
+- Use these properties to control the alignment of items within their grid cells:
+    
+    - **`justify-items`**: Aligns items horizontally within their grid cell.
+    - **`align-items`**: Aligns items vertically within their grid cell.
+    - **`justify-self`**: Aligns a specific grid item horizontally within its cell.
+    - **`align-self`**: Aligns a specific grid item vertically within its cell.
+
+```css
+.container {
+  display: grid;
+  justify-items: center; /* Horizontally centers all items */
+  align-items: center;   /* Vertically centers all items */
+}
+```
+
+---
+
+### Grid Layout vs Flexbox
+
+- **CSS Grid**: Best suited for two-dimensional layouts (both rows and columns).
+- **Flexbox**: Ideal for one-dimensional layouts (either rows OR columns).
+
+---
+
+## Additional Practical Application: CSS Grid Layout Example
+
+#### Basic Layout Structure Using Grid**
 
 ```css
 * {
@@ -221,36 +440,7 @@ div {
     padding: 0;
     box-sizing: border-box;
 }
-```
 
-- **Purpose**:
-    - Resets margin and padding to eliminate default browser styling.
-    - `box-sizing: border-box;` ensures padding and borders are included in an element's total width and height.
-
----
-
-## **2. Layout Structure**
-
-### Targeted HTML Elements:
-
-```css
-header, nav, main, footer, 
-aside, section, article {
-    border: 3px dotted black;
-    padding: 1em;
-}
-```
-
-- **Border**: Adds a dotted outline to visualize the structure during development.
-- **Padding**: Provides space inside the elements for better readability.
-
----
-
-## **3. Grid Layout for the Body**
-
-### CSS Code:
-
-```css
 body {
     min-height: 100vh;
     display: grid;
@@ -264,27 +454,12 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
 }
-```
 
-- **Properties Explained**:
-    - `min-height: 100vh;` ensures the body occupies the full viewport height.
-    - **Grid Definitions**:
-        - `grid-template-columns: 300px 1fr;`  
-            Creates two columns: a fixed-width sidebar (`300px`) and a flexible main content area (`1fr`).
-        - `grid-template-rows: auto auto 1fr auto;`  
-            Defines rows for header, navbar, content, and footer. Rows automatically adjust height (`auto`) except for the main content, which fills the remaining space (`1fr`).
-        - `grid-template-areas`: Names sections for easy placement in the grid.
-    - **Font Styling**:
-        - `font-family: Arial, sans-serif;` sets a clean and readable font.
-        - `line-height: 1.6;` improves text spacing.
+header, nav, main, footer, aside, section, article {
+    border: 3px dotted black;
+    padding: 1em;
+}
 
----
-
-## **4. Section-Specific Styling**
-
-### **4.1) Header**
-
-```css
 header {
     grid-area: header;
     background-color: blueviolet;
@@ -292,14 +467,7 @@ header {
     padding: 1em;
     text-align: center;
 }
-```
 
-- Assigned to the **`header`** grid area.
-- Uses a vibrant **blueviolet background** with white text.
-
-### **4.2) Navigation (Navbar)**
-
-```css
 nav {
     top: 0;
     position: sticky;
@@ -309,84 +477,29 @@ nav {
     display: flex;
     align-items: center;
 }
-nav button {
-    display: none;
-}
-```
 
-- Positioned **sticky** to remain at the top during scrolling.
-- Styled with **light blue background** and uses `flexbox` for alignment.
-- Navigation buttons (`nav button`) are hidden by default.
-
-### **4.3) Sidebar**
-
-```css
 aside {
     height: calc(100vh - 40px);
     top: 40px;
     position: sticky;
-    align-self: start;
     grid-area: sidebar;
     background-color: grey;
     padding: 1em;
 }
-```
 
-- Sticky positioning ensures the sidebar stays visible while scrolling.
-- Height is calculated dynamically to exclude 40px (possibly for navbar).
-
-### **4.4) Main Content**
-
-```css
 main {
     grid-area: main;
     background-color: lightgreen;
     padding: 1em;
 }
-```
 
-- Flexible grid area for primary content.
-- Styled with a light green background.
-
-### **4.5) Footer**
-
-```css
 footer {
     grid-area: footer;
     background-color: lightcoral;
     padding: 1em;
     text-align: center;
 }
-```
 
-- Placed at the bottom with a light coral background.
-
----
-
-## **5. Utility Classes**
-
-```css
-.empty {
-    height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 3px solid lightcoral;
-    margin: 0.3em;
-}
-```
-
-- **Purpose**: Placeholder element styled with:
-    - **Flexbox** for centering content.
-    - **Borders** and margins for visibility.
-
----
-
-## **6. Responsive Design**
-
-### Media Query for Small Screens (`max-width: 800px`):
-
-```css
 @media(max-width: 800px) {
     body {
         grid-template-columns: 1fr;
@@ -408,25 +521,7 @@ footer {
 }
 ```
 
-- **Adjustments**:
-    - **Body Layout**: Single-column grid for smaller screens (`grid-template-columns: 1fr;`).
-    - **Navbar**: Navigation buttons become visible (`display: block;`).
-    - **Sidebar**:
-        - Positioned **fixed** for mobile navigation.
-        - Hidden by default but displayed when `.show` is added.
 
----
-
-## **Key Concepts Covered**
-
-- CSS Grid: Defining areas, responsive grid adjustments.
-- Positioning: Sticky and fixed positioning for dynamic layouts.
-- Flexbox: Used for centering and aligning.
-- Responsive Design: Media queries for small screen adaptations.
-- Utility Classes: Modular design for reusability.
-
----
----
 # **Section-2: CSS Flexbox Layout**
 
 ## **1. Global Reset and Box-Sizing**
