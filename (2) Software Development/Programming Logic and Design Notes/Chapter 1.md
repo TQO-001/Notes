@@ -28,7 +28,8 @@ A **computer** is an electronic device that processes data by following instruct
 
 ---
 #### Understanding Simple Program Logic
-
+> [!tip] ### Autism For Evil
+> **_Try To code for future case_**
 - **Syntax vs. Logic Errors**:  
     A program with syntax errors won't run. A program with correct syntax can still produce wrong results if the logic is flawed. Logic errors are often harder to find than syntax errors.
 - **Language Doesn't Matter for Logic**:  
