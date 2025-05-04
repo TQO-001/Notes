@@ -76,21 +76,21 @@
 ---
 ### 6. Date Methods
 
-|Method|Description|Example|
-|---|---|---|
-|`.getDate()`|Returns the day of the month (1–31).|`let date = new Date(); console.log(date.getDate()); // Output: Day of the month`|
-|`.getDay()`|Returns the day of the week (0–6).|`let date = new Date(); console.log(date.getDay()); // Output: Day of the week (0-6)`|
-|`.getFullYear()`|Returns the year (4 digits).|`let date = new Date(); console.log(date.getFullYear()); // Output: Year`|
-|`.getHours()`|Returns the hour (0–23).|`let date = new Date(); console.log(date.getHours()); // Output: Hour`|
-|`.getMilliseconds()`|Returns the milliseconds (0–999).|`let date = new Date(); console.log(date.getMilliseconds()); // Output: Milliseconds`|
-|`.getMinutes()`|Returns the minutes (0–59).|`let date = new Date(); console.log(date.getMinutes()); // Output: Minutes`|
-|`.getSeconds()`|Returns the seconds (0–59).|`let date = new Date(); console.log(date.getSeconds()); // Output: Seconds`|
-|`.setDate(day)`|Sets the day of the month.|`let date = new Date(); date.setDate(15); console.log(date); // Output: Updated date`|
-|`.setFullYear(year)`|Sets the year.|`let date = new Date(); date.setFullYear(2025); console.log(date); // Output: Updated year`|
-|`.setHours(hours)`|Sets the hour.|`let date = new Date(); date.setHours(10); console.log(date); // Output: Updated hour`|
-|`.setMilliseconds(ms)`|Sets the milliseconds.|`let date = new Date(); date.setMilliseconds(500); console.log(date); // Output: Updated milliseconds`|
-|`.setMinutes(minutes)`|Sets the minutes.|`let date = new Date(); date.setMinutes(30); console.log(date); // Output: Updated minutes`|
-|`.setSeconds(seconds)`|Sets the seconds.|`let date = new Date(); date.setSeconds(45); console.log(date); // Output: Updated seconds`|
+| Method                 | Description                          | Example                                                                                                |
+| ---------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `.getDate()`           | Returns the day of the month (1–31). | `let date = new Date(); console.log(date.getDate()); // Output: Day of the month`                      |
+| `.getDay()`            | Returns the day of the week (0–6).   | `let date = new Date(); console.log(date.getDay()); // Output: Day of the week (0-6)`                  |
+| `.getFullYear()`       | Returns the year (4 digits).         | `let date = new Date(); console.log(date.getFullYear()); // Output: Year`                              |
+| `.getHours()`          | Returns the hour (0–23).             | `let date = new Date(); console.log(date.getHours()); // Output: Hour`                                 |
+| `.getMilliseconds()`   | Returns the milliseconds (0–999).    | `let date = new Date(); console.log(date.getMilliseconds()); // Output: Milliseconds`                  |
+| `.getMinutes()`        | Returns the minutes (0–59).          | `let date = new Date(); console.log(date.getMinutes()); // Output: Minutes`                            |
+| `.getSeconds()`        | Returns the seconds (0–59).          | `let date = new Date(); console.log(date.getSeconds()); // Output: Seconds`                            |
+| `.setDate(day)`        | Sets the day of the month.           | `let date = new Date(); date.setDate(15); console.log(date); // Output: Updated date`                  |
+| `.setFullYear(year)`   | Sets the year.                       | `let date = new Date(); date.setFullYear(2025); console.log(date); // Output: Updated year`            |
+| `.setHours(hours)`     | Sets the hour.                       | `let date = new Date(); date.setHours(10); console.log(date); // Output: Updated hour`                 |
+| `.setMilliseconds(ms)` | Sets the milliseconds.               | `let date = new Date(); date.setMilliseconds(500); console.log(date); // Output: Updated milliseconds` |
+| `.setMinutes(minutes)` | Sets the minutes.                    | `let date = new Date(); date.setMinutes(30); console.log(date); // Output: Updated minutes`            |
+| `.setSeconds(seconds)` | Sets the seconds.                    | `let date = new Date(); date.setSeconds(45); console.log(date); // Output: Updated seconds`            |
 
 ---
 ### 7. Set Methods
