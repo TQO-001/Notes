@@ -64,69 +64,42 @@ CSS has different **display values** that control how elements behave:
 ### 🧩 Additional Details on Each Display Type:
 
 #### 1. **`block`**
-
 - Examples: `<div>`, `<section>`, `<p>`
-    
 - Can set width, height, margin, padding.
-    
 - Stacks vertically by default.
-    
 
 #### 2. **`inline`**
-
 - Examples: `<span>`, `<a>`, `<strong>`
-    
 - Cannot set box-model properties like width/height/margin-top or margin-bottom.
-    
 - Respects surrounding text flow.
-    
 
 #### 3. **`inline-block`**
-
 - Best of both worlds:
-    
     - Behaves like `inline` in flow.
-        
     - Allows `block` features (width, height).
-        
 - Useful for buttons, labels, or inline forms.
-    
 
 #### 4. **`none`**
-
 - Completely removes the element from the layout and accessibility tree (unless hidden via `visibility: hidden`, which keeps space).
-    
 - Often used with JavaScript toggles.
-    
 
 #### 5. **`flex`**
-
 - Turns the container into a **flex formatting context**.
-    
 - Children become **flex items**, controlled by properties like `justify-content`, `align-items`, `flex-wrap`, etc.
-    
 - Ideal for 1-dimensional layouts.
-    
 
 #### 6. **`grid`**
-
 - Turns the container into a **grid formatting context**.
-    
 - Children are placed into **rows and columns**.
-    
 - Powerful for 2D layouts.
-    
 
 ---
 
 ### 🧠 Pro Tips:
 
 - Default `display` types depend on the HTML element (e.g., `div` is `block`, `span` is `inline`).
-    
 - Changing `display` can completely alter layout behavior — it's often the first thing to inspect when debugging layout issues.
-    
 - Use browser dev tools (e.g., Chrome's "Inspect") to visualize an element’s box and its display type.
-    
 
 
 ---
