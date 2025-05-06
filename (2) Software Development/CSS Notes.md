@@ -11,6 +11,8 @@
 ---
 
 ## 2️⃣ Box Model
+> Margin → Border → Padding → Content.
+
 Every HTML element is a **box** made up of:
 
 | Layer     | Description                                           |
@@ -21,26 +23,32 @@ Every HTML element is a **box** made up of:
 | `content` | The actual text, image, or other data inside the box. |
 ![[box-model.png]]
 
-### 📦 Key Concepts
+### 🔍 **Key Notes:**
+- **Total width =** `margin + border + padding + content`\
+- **Default Box Model:**  
+    Width/height only includes the **content** by default. Padding and border are _added on top._
+- **Better practice:**  
+    `box-sizing: border-box;` tells the browser to **include padding & border within the width/height.**  
+    This makes layouts much easier to handle.
+- **Margin collapsing:**  
+    Vertical margins of block elements can **collapse** (e.g., two `p` elements stacked will share margin).
 
-- **Total width =** `margin + border + padding + content`
-- Use `box-sizing: border-box;` to include padding + border **inside** the width/height.
-- You can set:
-    
-    - `margin: 10px;` (all sides)
-    - `margin: 10px 20px;` (top-bottom / left-right)
-    - `margin: 10px 15px 20px 25px;` (top, right, bottom, left)
-
-#### ➕ Shorthand:
-
+### 💡 **Example:**
 ```css
-padding: 10px 20px;  /* top-bottom 10px, left-right 20px */
-border: 1px solid #000;
+.box {   
+	width: 200px;   
+	padding: 20px;   
+	border: 5px solid black;   
+	margin: 30px; 
+}
 ```
+
+If no `box-sizing`, the total width =  `200 (content) + 40 (padding) + 10 (border) = 250px`
 
 ---
 
 ## 3️⃣ Display Types
+CSS has different **display values** that control how elements behave:
 
 |Type|Behavior|
 |---|---|
@@ -51,42 +59,127 @@ border: 1px solid #000;
 |`flex`|Flexbox container.|
 |`grid`|Grid container.|
 
+>📝 **Important:**  The **display** property is the **foundation** for Flexbox, Grid, and many modern layouts.
+
+### 🧩 Additional Details on Each Display Type:
+
+#### 1. **`block`**
+
+- Examples: `<div>`, `<section>`, `<p>`
+    
+- Can set width, height, margin, padding.
+    
+- Stacks vertically by default.
+    
+
+#### 2. **`inline`**
+
+- Examples: `<span>`, `<a>`, `<strong>`
+    
+- Cannot set box-model properties like width/height/margin-top or margin-bottom.
+    
+- Respects surrounding text flow.
+    
+
+#### 3. **`inline-block`**
+
+- Best of both worlds:
+    
+    - Behaves like `inline` in flow.
+        
+    - Allows `block` features (width, height).
+        
+- Useful for buttons, labels, or inline forms.
+    
+
+#### 4. **`none`**
+
+- Completely removes the element from the layout and accessibility tree (unless hidden via `visibility: hidden`, which keeps space).
+    
+- Often used with JavaScript toggles.
+    
+
+#### 5. **`flex`**
+
+- Turns the container into a **flex formatting context**.
+    
+- Children become **flex items**, controlled by properties like `justify-content`, `align-items`, `flex-wrap`, etc.
+    
+- Ideal for 1-dimensional layouts.
+    
+
+#### 6. **`grid`**
+
+- Turns the container into a **grid formatting context**.
+    
+- Children are placed into **rows and columns**.
+    
+- Powerful for 2D layouts.
+    
+
 ---
 
-## 4️⃣ Flexbox Basics
+### 🧠 Pro Tips:
 
+- Default `display` types depend on the HTML element (e.g., `div` is `block`, `span` is `inline`).
+    
+- Changing `display` can completely alter layout behavior — it's often the first thing to inspect when debugging layout issues.
+    
+- Use browser dev tools (e.g., Chrome's "Inspect") to visualize an element’s box and its display type.
+    
+
+
+---
+## 4️⃣ Flexbox Basics
+Flexbox is designed for **1D layouts** (row or column).
 - Set parent: `display: flex;`
 - **Main axis:** by default horizontal.
 - **Cross axis:** perpendicular to main axis.
 
-### Key Properties (Parent)
+### **Key Properties (Parent/Container):**
 
-- `flex-direction`: `row` | `row-reverse` | `column` | `column-reverse`
-- `justify-content`: aligns along **main axis.**
-    - `flex-start` | `center` | `space-between` | `space-around` | `space-evenly`
-- `align-items`: aligns along **cross axis.**
-    - `stretch` | `center` | `flex-start` | `flex-end`
-- `flex-wrap`: `nowrap` (default) | `wrap` | `wrap-reverse`
+- `flex-direction`:  Sets the main axis:
+    - `row` (default)
+    - `column`
+    - `row-reverse` / `column-reverse`
+    
+- `justify-content`:  Aligns items along the **main axis.**  
+    Values: `flex-start`, `center`, `space-between`, etc.
+    
+- `align-items`:  Aligns items along the **cross axis.**  
+    Values: `stretch`, `center`, `flex-start`, etc.
+    
+- `flex-wrap`:  Should items wrap if they don't fit?  
+    `nowrap` (default), `wrap`
 
-### Child Props
+### **Key Properties (Child/Item):**
 
-- `flex-grow`: how much to **grow.**
-- `flex-shrink`: how much to **shrink.**
-- `flex-basis`: **initial size.**
-- `align-self`: override parent's `align-items`.
+- `flex-grow`:  How much the item should grow relative to others.
+    
+- `flex-shrink`:  How much it should shrink.
+    
+- `flex-basis`:  The starting size before grow/shrink.
+    
+- `align-self`:  Overrides the container's `align-items`.
+    
+
+---
+
+### 💡 **Example:**
 
 ```css
 .container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
 }
 ```
 
 ---
-
 ## 5️⃣ Grid Basics
-- **CSS Grid Layout** is a powerful two-dimensional layout system for the web, enabling control over both rows and columns.
+Grid is designed for **2D layouts** (rows + columns), enabling control over both rows and columns.
+
 - Set parent: `display: grid;`
 - Define rows/columns:
     - `grid-template-columns: 1fr 2fr;`
@@ -113,7 +206,7 @@ Example:
 
 ### 📱 Media Queries
 
-- Syntax:
+Let you apply CSS based on **screen width (or other features).**
 
 ```css
 @media (max-width: 768px) {
@@ -125,27 +218,26 @@ Example:
 
 - Typical breakpoints:
     
-    - `320px` (mobile)
+    - `320px` - `480px` (mobile)
     - `768px` (tablet)
     - `1024px` (desktop)
     - `1440px+` (large screens)
 
 ### 🔄 Fluid Layout Tips
-
-- Use `%`, `vw/vh`, `em/rem` for scalable sizes.
+- Use relative units for scalable sizes: `%`, `vw/vh`, `em/rem` .
 - Flexbox/Grid handle responsiveness **naturally.**
 
 ---
 
 ## 7️⃣ Positioning
 
-|Type|Description|
-|---|---|
-|`static`|Default; normal flow.|
-|`relative`|Offset **relative to itself.**|
-|`absolute`|Positioned relative to **nearest positioned ancestor.**|
-|`fixed`|Stays in place **relative to viewport.**|
-|`sticky`|Switches between `relative` & `fixed` when crossing a threshold.|
+| Type       | Description                                                                        |
+| ---------- | ---------------------------------------------------------------------------------- |
+| `static`   | Default; Follows normal document flow.                                             |
+| `relative` | Offset **relative to itself.** Moves but keeps its space.                          |
+| `absolute` | Positioned relative to **nearest positioned ancestor. ** Removed from normal flow. |
+| `fixed`    | Stays in place **relative to viewport.**                                           |
+| `sticky`   | Switches between relative/fixed depending on scroll.                               |
 
 Example:
 
@@ -162,6 +254,7 @@ Example:
 ---
 
 ## 8️⃣ Typography Basics
+Typography is key for **readability and design:**
 
 |Property|Usage|
 |---|---|
@@ -192,3 +285,11 @@ p {
 - **Units:** `rem` = relative to root; `em` = relative to parent.
 
 ---
+## ✨ **Wrap-up:**
+
+- Box model and display types = **foundation** of CSS.
+- Flexbox = **1D layout** (great for navs, lists, toolbars).
+- Grid = **2D layout** (perfect for full page or cards).
+- Media queries = **make it responsive.**
+- Positioning = **fine-tune placement.**
+- Typography = **boosts design quality.**
