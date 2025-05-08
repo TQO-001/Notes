@@ -25,18 +25,12 @@ JSON is a text-based, human-readable format used to represent structured data. I
 - **No trailing commas** allowed
 
 ```json
-// Valid JSON
 {
   "title": "Hello",
   "count": 10,
   "active": true,
-  "tags": ["js", "json"]
-}
-
-// Invalid JSON (errors):
-{
-  title: "Missing quotes on key",
-  "extraComma": 5,
+  "tags": ["js", "json"],
+  "money": null
 }
 ```
 
