@@ -88,15 +88,7 @@ async function loadUsers() {
 - **Limit data size**: avoid sending huge payloads to the client.
 
 ---
-
-### 12.6 Quick Practice Ideas
-
-- Fetch and display data from `https://jsonplaceholder.typicode.com/posts`.
-- Store a user’s preferences in `localStorage` as JSON.
-- Build a tiny “settings” panel that reads/writes a JSON file (mock with a local object).
-
----
-### 12.7 Autism for Evil
+### 12.6 Autism for Evil
 > Pretty much that's all there is to it—JSON’s core is really as simple as that. It’s just:
 
 1. **Objects** (`{ "key": value, … }`)
@@ -123,6 +115,14 @@ const parsedUser = JSON.parse(jsonString);
 This is particularly useful when sending data to a server or storing it in local storage.
 
 Beyond that, everything else is just how you apply it: parsing with `JSON.parse()`, serializing with `JSON.stringify()`, handling errors, and making sure your data isn’t so deeply nested or huge that it becomes unwieldy.
+
+---
+
+### 12.7 Quick Practice Ideas
+
+- Fetch and display data from `https://jsonplaceholder.typicode.com/posts`.
+- Store a user’s preferences in `localStorage` as JSON.
+- Build a tiny “settings” panel that reads/writes a JSON file (mock with a local object).
 
 ## 13. Web Storage (localStorage & sessionStorage)
 
