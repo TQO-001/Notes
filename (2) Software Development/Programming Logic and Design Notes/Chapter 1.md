@@ -60,7 +60,7 @@ A programmer’s job involves writing instructions, but a professional programme
 
 The Program Development Cycle(PDC) is similar if not the same as the Software Development Life Cycle (SDLC), but for now just focus on learning this, learning doer.
 
-![[SDLC.png]]
+![[6-Stages-of-Software-Development-Life-Cycle.jpg]]
 
 ### 🧠 (1) Understanding the Problem
 
